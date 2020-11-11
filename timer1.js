@@ -1,5 +1,5 @@
 const args = process.argv.splice(2);
-const milliseconds = args.map(function(num) { return num * 1000 });
+const milliseconds = args.filter(number => number > 0).map(function(num) { return num * 1000 });
 console.log(milliseconds);
 
 const timer = function(x) {
@@ -11,5 +11,10 @@ const timer = function(x) {
 
 timer(milliseconds);
 
+// tests
 
-// node timer1.js 10 3 5 15 9
+// node timer1.js 10 3 4 15 -8 9 
+// node timer1.js 0
+// node timer1.js 3 "4" 5
+// node timer1.js 3 "hello" 5
+// node timer1.js
