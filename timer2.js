@@ -6,12 +6,18 @@ const rl = readline.createInterface({
 });
 
 const ringBell = function() {
-  process.stdout.write('');
+  process.stdout.write('\u0007');
 };
 
-rl.question("Type 'b' to make a beep. \n", function(userInput) {
+rl.question("Type 'b' to make a noise immediately, or a number from 1-9 to set a timer. \n", function(userInput) {
   if (userInput.trim().toLowerCase() === "b") {
     ringBell();
+    rl.close();
+  } else if (userInput > 0 && userInput < 10) {
+    process.stdout.write(`setting timer for ${userInput} seconds...`);
+    setTimeout(() => {
+      process.stdout.write('\x07');
+    }, userInput * 1000);
     rl.close();
   } else {
     rl.setPrompt("Wrong answer! \n")
